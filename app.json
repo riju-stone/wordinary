@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "this-is-a-dictionary",
-    "slug": "this-is-a-dictionary",
-    "version": "0.0.1-beta",
+    "name": "wordinary",
+    "slug": "wordinary",
+    "version": "0.0.1-alpha",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -12,24 +12,19 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.stone.dictionary"
+      "bundleIdentifier": "com.stone.wordinary"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#000"
+        "backgroundColor": "#ffffff"
       },
-      "package": "com.stone.dictionary"
+      "package": "com.stone.wordinary"
     },
-    "plugins": [
-      "expo-router",
-      "expo-font"
-    ],
+    "plugins": ["expo-router", "expo-font"],
     "experiments": {
       "typedRoutes": true
     }

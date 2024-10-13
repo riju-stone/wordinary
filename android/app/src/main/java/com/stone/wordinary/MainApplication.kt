@@ -1,4 +1,4 @@
-package com.stone.dictionary
+package com.stone.wordinary
 
 import android.app.Application
 import android.content.res.Configuration

@@ -44,7 +44,7 @@ if (getRNMinorVersion() >= 75) {
   }
 }
 
-rootProject.name = 'this-is-a-dictionary'
+rootProject.name = 'wordinary'
 
 dependencyResolutionManagement {
   versionCatalogs {
