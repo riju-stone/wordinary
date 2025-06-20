@@ -2,16 +2,13 @@ import React from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import {
     DarkTheme,
-    ThemeProvider,
-    NavigationContainer,
+    ThemeProvider
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import * as NavigationBar from "expo-navigation-bar";
-import * as Device from "expo-device";
 
 export {
     // Catch any errors thrown by the Layout component.
@@ -35,10 +32,6 @@ export default function RootLayout() {
     useEffect(() => {
         if (loaded) {
             SplashScreen.hideAsync();
-            if (Device.osName == "Android") {
-                NavigationBar.setPositionAsync("absolute");
-                NavigationBar.setBackgroundColorAsync("#ffffff01");
-            }
         }
     }, [loaded]);
 

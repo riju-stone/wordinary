@@ -1,11 +1,12 @@
 import { Platform, View, Text } from "react-native";
 import { StyleSheet } from "react-native";
 import { StatusBar } from "expo-status-bar";
+import React from "react";
 
 export default function SettingsLayout() {
   return (
     <View style={styles.container}>
-      <Text>Settings</Text>
+      <Text style={styles.title}>Settings</Text>
       {/* Use a light status bar on iOS to account for the black space above the modal */}
       <StatusBar style="light" />
     </View>
@@ -18,5 +19,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#24243D",
+  },
+  title: {
+    color: "white",
+    fontSize: 45,
+    fontWeight: "800",
   },
 });

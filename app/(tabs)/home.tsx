@@ -2,6 +2,7 @@ import { View, Text, StyleSheet } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import CardStackComponent from "@/components/card-stack/card-stack";
 import Colors from "@/constants/Colors";
+import React from "react";
 
 export default function HomeLayout() {
   return (
@@ -24,8 +25,8 @@ const styles = StyleSheet.create({
   },
   homeContainerTitle: {
     position: "absolute",
-    top: "8%",
-    fontSize: 50,
+    top: "5%",
+    fontSize: 45,
     fontWeight: "800",
     color: Colors.text,
   },

@@ -26,7 +26,7 @@ const cardData = [
   },
 ];
 
-const CardStackComponent = ({ maxVisibleItems }) => {
+const CardStackComponent = ({ maxVisibleItems }: { maxVisibleItems: number }) => {
   const animatedValue = useSharedValue(0);
   const currentIndex = useSharedValue(0);
   const previousIndex = useSharedValue(0);
@@ -47,10 +47,6 @@ const CardStackComponent = ({ maxVisibleItems }) => {
           />
         );
       })}
-      {/* <CardComponent stackPos={0} /> */}
-      {/* <CardComponent stackPos={1} /> */}
-      {/* <CardComponent stackPos={2} /> */}
-      {/* <CardComponent stackPos={3} /> */}
     </View>
   );
 };

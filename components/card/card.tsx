@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { Text, StyleSheet } from "react-native";
 import React from "react";
 import Colors from "@/constants/Colors";
 import { SharedValue } from "react-native-reanimated";
@@ -6,11 +6,13 @@ import Animated, {
   useAnimatedStyle,
   interpolate,
   withTiming,
+  Easing,
 } from "react-native-reanimated";
 import {
-  FlingGestureHandler,
+  Gesture,
   Directions,
   State,
+  GestureDetector,
 } from "react-native-gesture-handler";
 
 type CardData = {
@@ -34,23 +36,27 @@ const CardComponent = (props: CardProps) => {
     const translateY = interpolate(
       props.animatedValue.value,
       [props.stackPos - 1, props.stackPos, props.stackPos + 1],
-      [-42, 1, 42],
+      [-60, 1, 60],
     );
+
     const translateY2 = interpolate(
       props.animatedValue.value,
       [props.stackPos - 1, props.stackPos, props.stackPos + 1],
-      [-200, 1, 200],
+      [-60, 1, 60],
     );
+
     const scale = interpolate(
       props.animatedValue.value,
       [props.stackPos - 1, props.stackPos, props.stackPos + 1],
       [0.92, 1, 1.1],
     );
+
     const opacity = interpolate(
       props.animatedValue.value,
       [props.stackPos - 1, props.stackPos, props.stackPos + 1],
       [1, 1, 0],
     );
+
     return {
       transform: [
         {
@@ -65,58 +71,54 @@ const CardComponent = (props: CardProps) => {
         props.stackPos < props.currentIndex.value + props.maxVisibleItems - 1
           ? opacity
           : props.stackPos ==
-              props.currentIndex.value + props.maxVisibleItems - 1
-            ? withTiming(1)
-            : withTiming(0),
+            props.currentIndex.value + props.maxVisibleItems - 1
+            ? withTiming(1, { duration: 800 })
+            : withTiming(0, { duration: 800 }),
     };
   });
 
+  const upFlingGesture = Gesture.Fling().direction(Directions.UP).onEnd((event) => {
+    if (event.state === State.END) {
+      if (props.currentIndex.value !== 0) {
+        props.animatedValue.value = withTiming(
+          (props.currentIndex.value -= 1),
+        );
+
+        props.previousIndex.value = props.currentIndex.value - 1;
+      }
+    }
+  });
+
+  const downFlingGesture = Gesture.Fling().direction(Directions.DOWN).onEnd((event) => {
+    if (event.state === State.END) {
+      if (props.currentIndex.value !== props.dataLength - 1) {
+        props.animatedValue.value = withTiming(
+          (props.currentIndex.value += 1),
+        );
+
+        props.previousIndex.value = props.currentIndex.value;
+      }
+    }
+  });
+
+
   return (
-    <FlingGestureHandler
-      key={"up"}
-      direction={Directions.UP}
-      onHandlerStateChange={(event) => {
-        if (event.nativeEvent.state === State.END) {
-          if (props.currentIndex.value !== 0) {
-            props.animatedValue.value = withTiming(
-              (props.currentIndex.value -= 1),
-            );
-
-            props.previousIndex.value = props.currentIndex.value - 1;
-          }
-        }
-      }}
+    <GestureDetector gesture={Gesture.Exclusive(upFlingGesture, downFlingGesture)}
     >
-      <FlingGestureHandler
-        key={"down"}
-        direction={Directions.DOWN}
-        onHandlerStateChange={(event) => {
-          if (event.nativeEvent.state === State.END) {
-            if (props.currentIndex.value !== props.dataLength - 1) {
-              props.animatedValue.value = withTiming(
-                (props.currentIndex.value += 1),
-              );
-
-              props.previousIndex.value = props.currentIndex.value;
-            }
-          }
-        }}
+      <Animated.View
+        style={[
+          {
+            zIndex: props.dataLength - props.stackPos,
+            ...styles.wordCardContainer,
+          },
+          animatedStyle,
+        ]}
       >
-        <Animated.View
-          style={[
-            {
-              zIndex: props.dataLength - props.stackPos,
-              ...styles.wordCardContainer,
-            },
-            animatedStyle,
-          ]}
-        >
-          <Text>{props.cardData.word}</Text>
-          <Text>{props.cardData.pronounciation}</Text>
-          <Text>{props.cardData.meaning}</Text>
-        </Animated.View>
-      </FlingGestureHandler>
-    </FlingGestureHandler>
+        <Text>{props.cardData.word}</Text>
+        <Text>{props.cardData.pronounciation}</Text>
+        <Text>{props.cardData.meaning}</Text>
+      </Animated.View>
+    </GestureDetector>
   );
 };
 
@@ -124,7 +126,7 @@ const styles = StyleSheet.create({
   wordCardContainer: {
     position: "absolute",
     height: "80%",
-    width: "90%",
+    width: "95%",
     borderRadius: 20,
     backgroundColor: Colors.primaryColor,
     padding: 10,
