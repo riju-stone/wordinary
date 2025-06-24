@@ -6,7 +6,6 @@ import Animated, {
   useAnimatedStyle,
   interpolate,
   withTiming,
-  Easing,
 } from "react-native-reanimated";
 import {
   Gesture,
@@ -36,19 +35,19 @@ const CardComponent = (props: CardProps) => {
     const translateY = interpolate(
       props.animatedValue.value,
       [props.stackPos - 1, props.stackPos, props.stackPos + 1],
-      [-60, 1, 60],
+      [-40, 1, 120],
     );
 
     const translateY2 = interpolate(
       props.animatedValue.value,
       [props.stackPos - 1, props.stackPos, props.stackPos + 1],
-      [-60, 1, 60],
+      [-40, 1, 10],
     );
 
     const scale = interpolate(
       props.animatedValue.value,
       [props.stackPos - 1, props.stackPos, props.stackPos + 1],
-      [0.92, 1, 1.1],
+      [0.95, 1, 1.05],
     );
 
     const opacity = interpolate(
@@ -72,8 +71,8 @@ const CardComponent = (props: CardProps) => {
           ? opacity
           : props.stackPos ==
             props.currentIndex.value + props.maxVisibleItems - 1
-            ? withTiming(1, { duration: 800 })
-            : withTiming(0, { duration: 800 }),
+            ? withTiming(1, { duration: 400 })
+            : withTiming(0, { duration: 400 }),
     };
   });
 
@@ -100,7 +99,6 @@ const CardComponent = (props: CardProps) => {
       }
     }
   });
-
 
   return (
     <GestureDetector gesture={Gesture.Exclusive(upFlingGesture, downFlingGesture)}

@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   homeContainerTitle: {
     position: "absolute",
     top: "5%",
-    fontSize: 45,
+    fontSize: 40,
     fontWeight: "800",
     color: Colors.text,
   },

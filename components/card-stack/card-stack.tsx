@@ -24,6 +24,26 @@ const cardData = [
     pronounciation: "Akcept",
     meaning: "To consider something",
   },
+  {
+    word: "accept",
+    pronounciation: "Akcept",
+    meaning: "To consider something",
+  },
+  {
+    word: "accept",
+    pronounciation: "Akcept",
+    meaning: "To consider something",
+  },
+  {
+    word: "accept",
+    pronounciation: "Akcept",
+    meaning: "To consider something",
+  },
+  {
+    word: "accept",
+    pronounciation: "Akcept",
+    meaning: "To consider something",
+  },
 ];
 
 const CardStackComponent = ({ maxVisibleItems }: { maxVisibleItems: number }) => {
