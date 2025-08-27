@@ -4,7 +4,7 @@ import { Platform, StyleSheet } from "react-native";
 
 import { BlurView } from "expo-blur";
 
-import Colors from "@/constants/Colors";
+import Colors from "@/constants/colors";
 
 import HomeIcon from "@/assets/icons/home.svg";
 import SearchIcon from "@/assets/icons/search.svg";
